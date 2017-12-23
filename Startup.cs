@@ -48,7 +48,7 @@ namespace STNDown
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=CheckedServers}/{action=Index}/{id?}");
             });
         }
     }

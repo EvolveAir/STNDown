@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.NetworkInformation;
+using System.Text;
 
 namespace STNDown.Models
 {
@@ -11,11 +12,13 @@ namespace STNDown.Models
 
         public PingResult Check()
         {
-            // Ping's the local machine.
+            // Creates new ping
             Ping pingSender = new Ping();
             try
             {
-                PingReply reply = pingSender.Send(this.Location, 5000);
+                string data = "four";
+                byte[] buffer = Encoding.ASCII.GetBytes(data);
+                PingReply reply = pingSender.Send(this.Location, 5000, buffer);
 
                 if (reply.Status == IPStatus.Success)
                 {

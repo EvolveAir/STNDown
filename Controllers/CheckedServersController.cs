@@ -15,35 +15,35 @@ namespace STNDown.Controllers
             _context = context;
         }
 
-        //public async Task<IActionResult> DoManualCheck(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        public async Task<IActionResult> DoManualCheck(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var checkedServer = await _context.CheckedServer
-        //        .SingleOrDefaultAsync(m => m.ID == id);
-        //    if (checkedServer == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var checkedServer = await _context.CheckedServer
+                .SingleOrDefaultAsync(m => m.ID == id);
+            if (checkedServer == null)
+            {
+                return NotFound();
+            }
 
-        //    var result = LocalPing(checkedServer.Location);
+            var result = checkedServer.Check();
 
-        //    return View(result);
+            return View(result);
 
-        //}
+        }
 
         
 
-        // GET: CheckedServers
+        
         public async Task<IActionResult> Index()
         {
             return View(await _context.CheckedServer.ToListAsync());
         }
 
-        // GET: CheckedServers/Details/5
+         
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
